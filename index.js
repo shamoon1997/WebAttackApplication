@@ -10,7 +10,7 @@ const path = require('path');
 
 // Define the MongoDB connection string
 const uri =
-  'mongodb+srv://shamoon1997:mongodbatlas123@mongopracticestart.vdf7o.mongodb.net/bnbtest?retryWrites=true&w=majority'; //
+  'mongodb+srv://219410291:jsLmt8rRTwH57Jb6@clusterr.sbw4ywe.mongodb.net/'; //
 const mongoose = require('mongoose'); //
 mongoose.connect(uri);
 
