@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hammer & Brick Portal</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <header>
+      <img src="./uploads/Logo.png" alt="Company Logo" />
+      <h1>Hammer & Brick Portal</h1>
+    </header>
+
+    <section class="login-page">
+      <h2>Login</h2>
+      <form id="login-form">
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter your username"
+        />
+
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+        />
+
+        <button type="submit">Login</button>
+        <br />
+        <button class="continue-guest">Continue as Guest</button>
+      </form>
+    </section>
+
+    <script src="Server.js"></script>
+  </body>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Style the header */
+    header {
+      background-color: darkred;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+    }
+
+    header img {
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    header h1 {
+      font-size: 24px;
+    }
+
+    /* Style the login page */
+    .login-page {
+      width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .login-page h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .login-page form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .login-page label {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .login-page input[type='text'],
+    .login-page input[type='password'] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .login-page button[type='submit'] {
+      background-color: darkred;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      cursor: pointer;
+    }
+  </style>
+
+  <script>
+    const loginForm = document.getElementById('login-form');
+
+    loginForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const inputUsername = document.getElementById('username');
+      const inputPassword = document.getElementById('password');
+      const username = inputUsername.value;
+      const password = inputPassword.value;
+      fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status) {
+            localStorage.setItem('token', data.token);
+            window.location.href = 'admin';
+          } else {
+            alert("Username or password is incorrect. User doesn't exists");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          alert('An error occurred while logging in!');
+        });
+    });
+
+    const continueGuestButton = document.querySelector('.continue-guest');
+    continueGuestButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      window.location.href = 'guest';
+    });
+  </script>
+</html>

@@ -1,0 +1,115 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f1f1f1;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Header styles */
+  header {
+    background-color: #333;
+    color: #fff;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+  header h1 {
+    font-size: 28px;
+    margin: 0;
+  }
+  
+  /* Main styles */
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 60px);
+  }
+  
+  .dashboard {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  .dashboard h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  table th, table td {
+    padding: 10px;
+    text-align: left;
+  }
+  table th {
+    background-color: #f2f2f2;
+    font-weight: normal;
+  }
+  table td button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 5px;
+  }
+  table td input {
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .add-btn {
+    background-color: #16a085;
+  }
+  .increase-btn {
+    background-color: #c0392b;
+  }
+  .decrease-btn {
+    background-color: #2980b9;
+  }
+  .delete-btn {
+    background-color: #e74c3c;
+  }
+  
+  /* Media queries */
+  @media (max-width: 1024px) {
+    header h1 {
+      font-size: 24px;
+    }
+  }
+  @media (max-width: 768px) {
+    header {
+      height: auto;
+    }
+    header h1 {
+      font-size: 20px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    main {
+      height: calc(100vh - 120px);
+    }
+  }
+  @media (max-width: 480px) {
+    table td button {
+      font-size: 12px;
+      padding: 5px;
+    }
+    table td input {
+      padding: 5px;
+      font-size: 12px;
+    }
+    .dashboard {
+      padding: 20px;
+    }
+  }

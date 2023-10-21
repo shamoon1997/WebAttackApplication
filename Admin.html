@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <title>Hello Admin</title>
+  <head>
+    <link rel="stylesheet" href="css/Admin.css" />
+
+    <style>
+      body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f1f1f1;
+        padding: 0;
+        margin: 0;
+      }
+
+      /* Header styles */
+      header {
+        background-color: #333;
+        color: #fff;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+      }
+      header h1 {
+        font-size: 28px;
+        margin: 0;
+      }
+
+      /* Main styles */
+      main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 60px);
+      }
+
+      .dashboard {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .dashboard h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      table th,
+      table td {
+        padding: 10px;
+        text-align: left;
+      }
+      table th {
+        background-color: #f2f2f2;
+        font-weight: normal;
+      }
+      table td button {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 0 5px;
+      }
+      table td input {
+        padding: 10px;
+        border: none;
+        border-bottom: 1px solid #ccc;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .add-btn {
+        background-color: #16a085;
+      }
+      .increase-btn {
+        background-color: #c0392b;
+      }
+      .decrease-btn {
+        background-color: #2980b9;
+      }
+      .delete-btn {
+        background-color: #e74c3c;
+      }
+
+      /* Media queries */
+      @media (max-width: 1024px) {
+        header h1 {
+          font-size: 24px;
+        }
+      }
+      @media (max-width: 768px) {
+        header {
+          height: auto;
+        }
+        header h1 {
+          font-size: 20px;
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+        main {
+          height: calc(100vh - 120px);
+        }
+      }
+      @media (max-width: 480px) {
+        table td button {
+          font-size: 12px;
+          padding: 5px;
+        }
+        table td input {
+          padding: 5px;
+          font-size: 12px;
+        }
+        .dashboard {
+          padding: 20px;
+        }
+      }
+    </style>
+    <script>
+      const fetchEmployeeData = () => {
+        fetch('/Employees') // Replace with your API endpoint for fetching employees
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          })
+          .then((data) => {
+            // Call the function to render the employee data
+            renderEmployeeData(data);
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            alert(error);
+          });
+      };
+
+      function renderEmployeeData(employeeData) {
+        const employeeTableBody = document.getElementById('employeeTableBody');
+        employeeTableBody.innerHTML = '';
+
+        employeeData.forEach((employee) => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+      <td>${employee.ID}</td>
+      <td>${employee.Name}</td>
+      <td>${employee.Salary}</td>
+      <td>
+        <button class="increase-btn">Increase Salary</button>
+        <button class="decrease-btn">Decrease Salary</button>
+        <button class="delete-btn">Delete Employee</button>
+      </td>
+    `;
+
+          // Add event listeners to the buttons
+          const increaseButton = row.querySelector('.increase-btn');
+          const decreaseButton = row.querySelector('.decrease-btn');
+          const deleteButton = row.querySelector('.delete-btn');
+
+          increaseButton.addEventListener('click', () => {
+            // Increase the salary by 1
+            employee.Salary++;
+            // Update the displayed salary
+            row.querySelector('td:nth-child(3)').textContent = employee.Salary;
+          });
+
+          decreaseButton.addEventListener('click', () => {
+            // Decrease the salary by 1 (with a minimum value of 0)
+            employee.Salary = Math.max(0, employee.Salary - 1);
+            // Update the displayed salary
+            row.querySelector('td:nth-child(3)').textContent = employee.Salary;
+          });
+
+          deleteButton.addEventListener('click', () => {
+            // Send a POST request to the delete route with the employee ID
+            fetch('/deleteEmployee', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ employeeID: employee.ID }),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.success) {
+                  // Remove the row from the table if the deletion was successful
+                  alert('Deleted Sucessfully!');
+                  window.location.reload();
+                } else {
+                  // Handle errors or display a message
+                  alert('Error deleting employee');
+                  console.error('Error deleting employee');
+                }
+              });
+          });
+
+          employeeTableBody.appendChild(row);
+        });
+      }
+
+      const addEmployee = () => {
+        const employeeID = document.getElementById('employeeID').value;
+        const employeeName = document.getElementById('employeeName').value;
+        const employeeSalary = document.getElementById('employeeSalary').value;
+
+        const data = {
+          employeeID: employeeID,
+          employeeName: employeeName,
+          employeeSalary: employeeSalary,
+        };
+
+        fetch('/addEmployee', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          })
+          .then((data) => {
+            console.log('Employee added successfully:', data);
+            // You can add further logic here if needed
+            alert('Employee added successfully!');
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            alert(error);
+          });
+      };
+      window.onload = fetchEmployeeData;
+    </script>
+  </head>
+  <body>
+    <section class="dashboard" id="dashboard">
+      <h2>Employee Salaries</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Salary</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="employeeTableBody"></tbody>
+        <div>
+          <input
+            type="number"
+            id="employeeID"
+            name="employeeID"
+            placeholder="Employee ID"
+          />
+          <input
+            type="text"
+            id="employeeName"
+            name="employeeName"
+            placeholder="Employee Name"
+          />
+          <input
+            id="employeeSalary"
+            type="number"
+            name="salary"
+            placeholder="Employee Salary"
+          />
+          <button class="add-btn" onclick="addEmployee()">Add Employee</button>
+        </div>
+      </table>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel="stylesheet" href="CSS/Guest.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-image: url('/uploads/Background.webp');
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .dark-red-form h2 {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .dark-red-form label {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .dark-red-form input[type='text'],
+      .dark-red-form input[type='email'],
+      .dark-red-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #fff;
+        color: #333;
+      }
+
+      .dark-red-form button[type='submit'] {
+        background-color: darkred;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        cursor: pointer;
+      }
+
+      .service-carousel {
+        display: flex;
+        justify-content: space-between;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        padding: 20px 0;
+      }
+
+      .service-card {
+        flex: 0 0 40%;
+        margin-right: 20px;
+        scroll-snap-align: start;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .service-card img {
+        width: 50px;
+        margin-bottom: 10px;
+      }
+
+      .service-card h3 {
+        font-size: 22px;
+        margin-bottom: 10px;
+      }
+
+      .service-card p {
+        font-size: 16px;
+      }
+
+      .service-card:last-child {
+        margin-right: 0;
+      }
+
+      @media screen and (max-width: 768px) {
+        .service-carousel {
+          flex-wrap: wrap;
+        }
+
+        .service-card {
+          flex: 0 0 100%;
+          margin-right: 0;
+          margin-bottom: 20px;
+        }
+      }
+
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .hero {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        text-align: left;
+        margin-bottom: 50px;
+      }
+
+      .hero-content {
+        flex: 1;
+      }
+
+      .hero h2 {
+        margin-top: 0;
+        font-size: 48px;
+        line-height: 1.2;
+        color: #3250a8;
+        margin-bottom: 20px;
+      }
+
+      .hero p {
+        font-size: 20px;
+        color: #555;
+        margin-bottom: 30px;
+      }
+
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #3250a8;
+        color: #fff;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+
+      .button:hover {
+        background-color: #1e2a78;
+      }
+
+      .hero-image {
+        flex: 1;
+        max-width: 50%;
+        margin: 0 auto;
+      }
+
+      .services {
+        margin-bottom: 50px;
+        text-align: center;
+      }
+
+      .services h2 {
+        margin-top: 0;
+        font-size: 36px;
+        color: #3250a8;
+        margin-bottom: 20px;
+      }
+
+      .services p {
+        font-size: 20px;
+        color: #555;
+        margin-bottom: 30px;
+      }
+
+      .services ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+      }
+
+      .services li {
+        font-size: 24px;
+        color: #444;
+        line-height: 1.5;
+        margin-bottom: 10px;
+        text-align: left;
+      }
+
+      .projects {
+        margin-bottom: 50px;
+        text-align: center;
+      }
+
+      .projects h2 {
+        margin-top: 0;
+        font-size: 36px;
+        color: #3250a8;
+        margin-bottom: 20px;
+      }
+
+      .project-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .project {
+        flex: 1;
+        max-width: 30%;
+        padding: 10px;
+        margin: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        text-align: center;
+      }
+
+      .project img {
+        max-width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .project h3 {
+        margin-top: 0;
+        font-size: 24px;
+        color: #3250a8;
+        margin-bottom: 10px;
+      }
+
+      .project p {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.5;
+        margin-bottom: 10px;
+      }
+
+      main {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+      }
+      .intro {
+        margin: 50px auto 0;
+        max-width: 600px;
+        text-align: left;
+      }
+
+      .intro h2 {
+        margin-top: 0;
+      }
+      /* Style the dark red form */
+      .dark-red-form {
+        width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: goldenrod;
+        color: white;
+      }
+    </style>
+    <title>Welcome Guest!</title>
+  </head>
+
+  <body>
+    <section class="services">
+      <h2 class="red">Our Services</h2>
+      <div class="service-carousel">
+        <div class="service-card">
+          <img src="uploads/house.jpeg" alt="Construction Icon" />
+          <h3>Custom Home Building</h3>
+          <p>We can build your dream home from the ground up.</p>
+        </div>
+
+        <div class="service-card">
+          <img src="./uploads/remodel.jpeg" alt="Remodeling Icon" />
+          <h3>Remodeling</h3>
+          <p>
+            We can help you transform your existing home into the home of your
+            dreams.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <img src="./uploads/commercial.jpeg" alt="Commercial Icon" />
+          <h3>Commercial Construction</h3>
+          <p>
+            We offer a variety of commercial construction services, from office
+            buildings to retail spaces.
+          </p>
+        </div>
+      </div>
+    </section>
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <h2>Transform Your Vision into Reality</h2>
+          <p>
+            At Construction Co., we pride ourselves on delivering exceptional
+            craftsmanship, quality, and value. Our team of experts will work
+            closely with you to bring your custom home or commercial project to
+            life. Let us be your partner every step of the way.
+          </p>
+        </div>
+        <img
+          src="./uploads/commercial.jpeg"
+          alt="Construction Work"
+          class="hero-image"
+        />
+      </section>
+
+      <section class="services">
+        <h2>Our Services</h2>
+        <p>We offer a range of construction services to meet your needs:</p>
+      </section>
+
+      <section class="projects">
+        <h2>Recent Projects</h2>
+        <div class="project-grid">
+          <div class="project">
+            <img src="./uploads/house.jpeg" alt="Project 1" />
+            <h3>Custom Home Construction</h3>
+            <p>
+              Our team recently completed this beautiful custom home for a
+              client in the mountains. The home features a spacious open-floor
+              plan, wrap-around porch, and stunning mountain views.
+            </p>
+          </div>
+          <div class="project">
+            <img src="./uploads/remodel.jpeg" alt="Project 2" />
+            <h3>Commercial Property Development</h3>
+            <p>
+              We recently completed this state-of-the-art office building for a
+              technology company in the city. The building features modern
+              design elements, energy-efficient systems, and advanced security
+              features.
+            </p>
+          </div>
+          <div class="project">
+            <img src="./uploads/remodel.jpeg" alt="Project 3" />
+            <h3>Home Remodeling and Renovation</h3>
+            <p>
+              We recently completed this stunning renovation of a historic home
+              in the suburbs. The home features updated amenities, while
+              preserving the original character and charm of the home.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <section>
+      <form class="dark-red-form" id="contact-form">
+        <h2>Get in Touch</h2>
+        <p>
+          Fill out the form below, and we'll get back to you as soon as
+          possible.
+        </p>
+
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Enter your name"
+        />
+
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+        />
+
+        <label for="message">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          placeholder="Enter your message"
+        ></textarea>
+
+        <button type="submit">Send</button>
+      </form>
+    </section>
+    <script>
+      document
+        .getElementById('contact-form')
+        .addEventListener('submit', function (e) {
+          e.preventDefault(); // Prevent the default form submission
+
+          // Get form data
+          const name = document.getElementById('name').value;
+          const email = document.getElementById('email').value;
+          const message = document.getElementById('message').value;
+
+          // Create a data object
+          const data = {
+            name: name,
+            email: email,
+            message: message,
+          };
+
+          // Make a POST request to your API
+          fetch('/contact', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log('Data sent:', data);
+              alert('Submitted successfully Thank you!');
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              alert('Some Error in submitting form');
+            });
+        });
+    </script>
+  </body>
+</html>
